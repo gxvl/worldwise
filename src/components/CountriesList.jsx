@@ -3,8 +3,10 @@ import CountryItem from "./CountryItem";
 import styles from "./countryList.module.css";
 import Spinner from "./Spinner";
 import Message from "./Message";
+import { useCities } from "../contexts/CitiesContext";
 
-function CountriesList({ cities, isLoading }) {
+function CountriesList() {
+  const { cities, isLoading } = useCities();
   if (isLoading) return <Spinner />;
   if (!cities.length)
     return (
@@ -21,7 +23,7 @@ function CountriesList({ cities, isLoading }) {
     <ul className={styles.countryList}>
       {countries.map((country) => (
         // eslint-disable-next-line react/jsx-key
-        <CountryItem country={country} />
+        <CountryItem country={country} key={country.country} />
       ))}
     </ul>
   );
